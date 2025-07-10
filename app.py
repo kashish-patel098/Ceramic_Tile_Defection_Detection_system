@@ -7,7 +7,7 @@ import tempfile
 from pathlib import Path
 import time
 from PIL import Image
-import io
+
 
 # Set page config
 st.set_page_config(
@@ -108,6 +108,8 @@ class CeramicDefectDetector:
             'class_counts': class_counts,
             'detections': detections
         }
+
+
 
 def main():
     # Header
