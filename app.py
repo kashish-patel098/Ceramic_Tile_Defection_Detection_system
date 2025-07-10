@@ -1,5 +1,5 @@
 import streamlit as st
-import cv2
+import cv2 
 import numpy as np
 from ultralytics import YOLO
 import os
@@ -14,29 +14,109 @@ st.set_page_config(
     page_title="Ceramic Defect Detection",
     page_icon="🔍",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="collapsed"  # Changed from 'expanded' to 'collapsed' for better UX
 )
 
-# Custom CSS for better styling
+# Custom CSS for better styling, including sidebar
 st.markdown("""
 <style>
+    /* Main header styling */
     .main-header {
-        font-size: 2.5rem;
-        color: #1f77b4;
+        font-size: 2.8rem;
+        color: #0a2342;
         text-align: center;
-        margin-bottom: 2rem;
+        margin-bottom: 2.5rem;
+        font-weight: 700;
+        letter-spacing: 1px;
     }
+    /* Sidebar styling */
+    section[data-testid="stSidebar"] {
+        background: linear-gradient(135deg, #e3e9f7 0%, #f7fafc 100%);
+        border-right: 1px solid #e0e0e0;
+        box-shadow: 2px 0 8px rgba(10,35,66,0.04);
+        padding-top: 2rem;
+    }
+    /* Add settings icon near sidebar toggle */
+    [data-testid="collapsedControl"]::before {
+        content: "\\2699  "; /* Unicode for ⚙️ */
+        font-size: 1.3rem;
+        color: #1f77b4;
+        margin-right: 0.3rem;
+        vertical-align: middle;
+        position: relative;
+        top: 1px;
+        left: -2px;
+        transition: color 0.2s;
+        pointer-events: none;
+    }
+    [data-testid="collapsedControl"]:hover::before {
+        color: #0a2342;
+    }
+    /* Sidebar title */
+    .css-1d391kg, .css-1v0mbdj {
+        color: #0a2342 !important;
+        font-size: 1.3rem !important;
+        font-weight: 600 !important;
+        margin-bottom: 1.5rem !important;
+    }
+    /* Metric card styling */
     .metric-card {
         background-color: #f0f2f6;
-        padding: 1rem;
-        border-radius: 0.5rem;
-        margin: 0.5rem 0;
+        padding: 1.2rem;
+        border-radius: 0.7rem;
+        margin: 0.7rem 0;
+        box-shadow: 0 2px 8px rgba(10,35,66,0.06);
     }
+    /* Detection box styling */
     .detection-box {
         border: 2px solid #1f77b4;
+        border-radius: 0.7rem;
+        padding: 1.2rem;
+        margin: 1.2rem 0;
+        background: #f7fafc;
+    }
+    /* Tab styling */
+    .stTabs [data-baseweb="tab-list"] {
+        background: #e3e9f7;
+        border-radius: 0.7rem 0.7rem 0 0;
+        padding: 0.5rem 0.5rem 0 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+    .stTabs [data-baseweb="tab"] {
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: #0a2342;
+        padding: 0.7rem 1.5rem;
+        border-radius: 0.7rem 0.7rem 0 0;
+        margin-right: 0.2rem;
+        transition: background 0.2s;
+    }
+    .stTabs [aria-selected="true"] {
+        background: #fff;
+        color: #1f77b4;
+        border-bottom: 2px solid #1f77b4;
+    }
+    /* Button styling */
+    .stButton > button {
+        background: linear-gradient(90deg, #1f77b4 0%, #0a2342 100%);
+        color: #fff;
+        font-weight: 600;
         border-radius: 0.5rem;
-        padding: 1rem;
-        margin: 1rem 0;
+        border: none;
+        padding: 0.7rem 1.5rem;
+        margin: 0.5rem 0;
+        transition: background 0.2s, box-shadow 0.2s;
+        box-shadow: 0 2px 8px rgba(10,35,66,0.08);
+    }
+    .stButton > button:hover {
+        background: linear-gradient(90deg, #0a2342 0%, #1f77b4 100%);
+        color: #fff;
+        box-shadow: 0 4px 16px rgba(10,35,66,0.12);
+    }
+    /* General spacing */
+    .block-container {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -386,7 +466,7 @@ def main():
                             annotated_frame_rgb = cv2.cvtColor(annotated_frame, cv2.COLOR_BGR2RGB)
                             pil_image = Image.fromarray(annotated_frame_rgb)
                             
-                            camera_feed.image(pil_image, caption="Live Detection", use_column_width=True)
+                            camera_feed.image(pil_image, caption="Live Detection")
                         
                         # Small delay to prevent overwhelming the UI
                         time.sleep(0.1)
