@@ -23,7 +23,7 @@ st.markdown("""
     /* Main header styling */
     .main-header {
         font-size: 2.8rem;
-        color: #0a2342;
+        color: var(--text-color);
         text-align: center;
         margin-bottom: 2.5rem;
         font-weight: 700;
@@ -31,41 +31,27 @@ st.markdown("""
     }
     /* Sidebar styling */
     section[data-testid="stSidebar"] {
-        background: linear-gradient(135deg, #e3e9f7 0%, #f7fafc 100%);
-        border-right: 1px solid #e0e0e0;
+        background: var(--secondary-background-color) !important;
+        border-right: 1px solid #444;
         box-shadow: 2px 0 8px rgba(10,35,66,0.04);
         padding-top: 2rem;
-    }
-    /* Add settings icon near sidebar toggle */
-    [data-testid="collapsedControl"]::before {
-        content: "\\2699  "; /* Unicode for ⚙️ */
-        font-size: 1.3rem;
-        color: #1f77b4;
-        margin-right: 0.3rem;
-        vertical-align: middle;
-        position: relative;
-        top: 1px;
-        left: -2px;
-        transition: color 0.2s;
-        pointer-events: none;
-    }
-    [data-testid="collapsedControl"]:hover::before {
-        color: #0a2342;
+        color: var(--text-color) !important;
     }
     /* Sidebar title */
     .css-1d391kg, .css-1v0mbdj {
-        color: #0a2342 !important;
+        color: var(--text-color) !important;
         font-size: 1.3rem !important;
         font-weight: 600 !important;
         margin-bottom: 1.5rem !important;
     }
     /* Metric card styling */
     .metric-card {
-        background-color: #f0f2f6;
+        background-color: var(--secondary-background-color);
         padding: 1.2rem;
         border-radius: 0.7rem;
         margin: 0.7rem 0;
         box-shadow: 0 2px 8px rgba(10,35,66,0.06);
+        color: var(--text-color);
     }
     /* Detection box styling */
     .detection-box {
@@ -73,11 +59,12 @@ st.markdown("""
         border-radius: 0.7rem;
         padding: 1.2rem;
         margin: 1.2rem 0;
-        background: #f7fafc;
+        background: var(--secondary-background-color);
+        color: var(--text-color);
     }
     /* Tab styling */
     .stTabs [data-baseweb="tab-list"] {
-        background: #e3e9f7;
+        background: var(--secondary-background-color);
         border-radius: 0.7rem 0.7rem 0 0;
         padding: 0.5rem 0.5rem 0 0.5rem;
         margin-bottom: 0.5rem;
@@ -85,14 +72,14 @@ st.markdown("""
     .stTabs [data-baseweb="tab"] {
         font-size: 1.1rem;
         font-weight: 500;
-        color: #0a2342;
+        color: var(--text-color);
         padding: 0.7rem 1.5rem;
         border-radius: 0.7rem 0.7rem 0 0;
         margin-right: 0.2rem;
         transition: background 0.2s;
     }
     .stTabs [aria-selected="true"] {
-        background: #fff;
+        background: var(--background-color);
         color: #1f77b4;
         border-bottom: 2px solid #1f77b4;
     }
@@ -117,6 +104,8 @@ st.markdown("""
     .block-container {
         padding-top: 2rem;
         padding-bottom: 2rem;
+        background: var(--background-color);
+        color: var(--text-color);
     }
 </style>
 """, unsafe_allow_html=True)
@@ -466,7 +455,7 @@ def main():
                             annotated_frame_rgb = cv2.cvtColor(annotated_frame, cv2.COLOR_BGR2RGB)
                             pil_image = Image.fromarray(annotated_frame_rgb)
                             
-                            camera_feed.image(pil_image, caption="Live Detection")
+                            camera_feed.image(pil_image, caption="Live Detection", use_column_width=True)
                         
                         # Small delay to prevent overwhelming the UI
                         time.sleep(0.1)
