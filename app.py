@@ -29,30 +29,30 @@ st.markdown("""
         font-weight: 700;
         letter-spacing: 1px;
     }
-    /* Sidebar styling */
-    section[data-testid="stSidebar"] {
-        background: var(--secondary-background-color) !important;
-        border-right: 1px solid #444;
-        box-shadow: 2px 0 8px rgba(10,35,66,0.04);
-        padding-top: 2rem;
-        color: var(--text-color) !important;
-    }
-    /* Sidebar title */
-    .css-1d391kg, .css-1v0mbdj {
-        color: var(--text-color) !important;
-        font-size: 1.3rem !important;
-        font-weight: 600 !important;
-        margin-bottom: 1.5rem !important;
-    }
-    /* Metric card styling */
-    .metric-card {
-        background-color: var(--secondary-background-color);
-        padding: 1.2rem;
-        border-radius: 0.7rem;
-        margin: 0.7rem 0;
-        box-shadow: 0 2px 8px rgba(10,35,66,0.06);
-        color: var(--text-color);
-    }
+    # /* Sidebar styling */
+    # section[data-testid="stSidebar"] {
+    #     background: var(--secondary-background-color) !important;
+    #     border-right: 1px solid #444;
+    #     box-shadow: 2px 0 8px rgba(10,35,66,0.04);
+    #     padding-top: 2rem;
+    #     color: var(--text-color) !important;
+    # }
+    # /* Sidebar title */
+    # .css-1d391kg, .css-1v0mbdj {
+    #     color: var(--text-color) !important;
+    #     font-size: 1.3rem !important;
+    #     font-weight: 600 !important;
+    #     margin-bottom: 1.5rem !important;
+    # }
+    # /* Metric card styling */
+    # .metric-card {
+    #     background-color: var(--secondary-background-color);
+    #     padding: 1.2rem;
+    #     border-radius: 0.7rem;
+    #     margin: 0.7rem 0;
+    #     box-shadow: 0 2px 8px rgba(10,35,66,0.06);
+    #     color: var(--text-color);
+    # }
     /* Detection box styling */
     .detection-box {
         border: 2px solid #1f77b4;
